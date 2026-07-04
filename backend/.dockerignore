@@ -1,0 +1,15 @@
+.venv
+venv
+__pycache__
+*.py[cod]
+*.egg-info
+.pytest_cache
+.mypy_cache
+.env
+*.db
+tests
+smoke_test.py
+test_analyze_run.py
+test_results.txt
+run_test_suite.ps1
+.git

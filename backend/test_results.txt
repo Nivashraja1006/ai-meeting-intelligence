@@ -1,0 +1,86 @@
+AI Meeting Intelligence Assistant — Backend Test Run
+Generated: 2026-07-04 (agent run)
+Working directory: C:\Users\Nivash Raja\ai-meeting-intelligence-assistant\backend
+
+================================================================================
+BLOCKING ERROR — Shell commands could not be executed
+================================================================================
+
+Every shell command failed immediately with:
+
+  Sandbox policy 'workspace_readwrite' is not supported on this system.
+  Ensure the sandbox helper binary is available, or use 'insecure_none'.
+  Reason: Windows sandbox helper only provides network proxy, not filesystem isolation
+
+Because of this, steps 1, 2, 4, 5, and 6 could NOT be run by the agent.
+No .venv was created; uvicorn was not started; test_analyze_run.py was not executed.
+
+To run the full suite locally (outside the sandbox), execute:
+
+  powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\Nivash Raja\ai-meeting-intelligence-assistant\backend\run_test_suite.ps1"
+
+Or run the steps manually:
+
+  cd "C:\Users\Nivash Raja\ai-meeting-intelligence-assistant\backend"
+  python -m venv .venv
+  .\.venv\Scripts\pip.exe install -r requirements.txt
+  .\.venv\Scripts\uvicorn.exe app.main:app --reload --port 8000
+  .\.venv\Scripts\python.exe test_analyze_run.py
+
+================================================================================
+Step 3 — Verification (completed via file read, no shell required)
+================================================================================
+
+[OK] .env exists
+     Path: C:\Users\Nivash Raja\ai-meeting-intelligence-assistant\backend\.env
+
+[OK] .gitignore contains .env
+     Path: C:\Users\Nivash Raja\ai-meeting-intelligence-assistant\.gitignore
+     First line of .gitignore: .env
+
+================================================================================
+Step 1 — python -m venv .venv
+================================================================================
+NOT RUN (sandbox blocked)
+
+================================================================================
+Step 2 — pip install -r requirements.txt
+================================================================================
+NOT RUN (sandbox blocked)
+
+requirements.txt contents:
+  fastapi>=0.115.0
+  uvicorn[standard]>=0.32.0
+  anthropic>=0.40.0
+  pydantic>=2.0
+  pydantic-settings>=2.0
+  python-dotenv>=1.0
+  httpx>=0.27.0
+
+================================================================================
+Step 4 — Start uvicorn on port 8000
+================================================================================
+NOT RUN (sandbox blocked)
+
+================================================================================
+Step 5 — Wait for http://127.0.0.1:8000/health
+================================================================================
+NOT RUN (sandbox blocked; no server started)
+
+================================================================================
+Step 6 — python test_analyze_run.py
+================================================================================
+NOT RUN (sandbox blocked)
+
+Test script exists at:
+  C:\Users\Nivash Raja\ai-meeting-intelligence-assistant\backend\test_analyze_run.py
+
+Planned test cases (4):
+  1. VALID — realistic meeting with action items and decisions
+  2. INVALID — transcript under 50 characters
+  3. INVALID — empty transcript
+  4. VALID — no clear action items (discussion only)
+
+================================================================================
+END OF REPORT
+================================================================================

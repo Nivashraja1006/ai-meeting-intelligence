@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: ai-meeting-intelligence-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-4-20250514
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:////app/data/meetings.db
+      - key: CORS_ORIGINS
+        sync: false
+    disk:
+      name: meeting-data
+      mountPath: /app/data
+      sizeGB: 1
