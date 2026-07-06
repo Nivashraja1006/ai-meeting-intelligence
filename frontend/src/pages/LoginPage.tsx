@@ -22,7 +22,7 @@ export default function LoginPage() {
     try {
       await login(email, password);
       showToast("success", "Welcome back!");
-      navigate("/");
+      navigate("/app");
     } catch (err) {
       setError(err instanceof ApiClientError ? err.message : "Login failed");
     } finally {

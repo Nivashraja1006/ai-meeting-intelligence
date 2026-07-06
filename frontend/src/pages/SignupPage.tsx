@@ -22,7 +22,7 @@ export default function SignupPage() {
     try {
       await signup(email, password);
       showToast("success", "Account created — let's analyze your first meeting");
-      navigate("/");
+      navigate("/app");
     } catch (err) {
       setError(err instanceof ApiClientError ? err.message : "Signup failed");
     } finally {
