@@ -15,6 +15,16 @@ services:
         sync: false
       - key: JWT_SECRET_KEY
         generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: "7"
+      - key: RATE_LIMIT_REQUESTS
+        value: "100"
+      - key: RATE_LIMIT_WINDOW_SECONDS
+        value: "60"
       - key: DATABASE_URL
         value: sqlite:////app/data/meetings.db
       - key: CORS_ORIGINS
@@ -23,3 +33,19 @@ services:
       name: meeting-data
       mountPath: /app/data
       sizeGB: 1
+
+  - type: web
+    name: ai-meeting-intelligence-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: ai-meeting-intelligence-api
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

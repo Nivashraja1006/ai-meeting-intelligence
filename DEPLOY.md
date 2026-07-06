@@ -100,6 +100,8 @@ Live URL: `https://ai-meeting-intelligence-api.fly.dev`
 
 ## 5. Post-deploy checklist
 
+- [ ] Run `scripts/verify-deploy.ps1 -BackendUrl ... -FrontendUrl ...`
+- [ ] Run `scripts/update-readme-urls.ps1` and push README update
 - [ ] Update backend `CORS_ORIGINS` to include your exact Vercel URL (no trailing slash)
 - [ ] Redeploy backend after CORS change
 - [ ] Sign up on the live frontend → run a test analysis
@@ -127,6 +129,18 @@ RATE_LIMIT_WINDOW_SECONDS=60
 ```
 VITE_API_URL=https://your-api.onrender.com
 ```
+
+---
+
+## 6. Push to GitHub (automated script)
+
+From project root:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/push-to-github.ps1
+```
+
+Requires [GitHub CLI](https://cli.github.com/) logged in (`gh auth login`).
 
 ---
 

@@ -1,6 +1,6 @@
+import os
 import asyncio
 import json
-
 import anthropic
 from anthropic import APIError
 from fastapi import HTTPException
@@ -137,7 +137,7 @@ def _call_anthropic(
             model=settings.anthropic_model,
             max_tokens=4096,
             system=SYSTEM_PROMPT,
-            tools=[EXTRACT_MEETING_INTELLIGENCE_TOOL],
+            tools=[{"type": "function", **EXTRACT_MEETING_INTELLIGENCE_TOOL}],
             tool_choice={"type": "tool", "name": "extract_meeting_intelligence"},
             messages=messages,
         )
@@ -188,4 +188,47 @@ def _analyze_transcript_sync(transcript: str) -> MeetingIntelligence:
 
 
 async def analyze_transcript(transcript: str) -> MeetingIntelligence:
+    if os.environ.get("MOCK_MODE", "false").lower() == "true":
+        return MeetingIntelligence.model_validate({
+            "meeting_title": "Mock Meeting Analysis",
+            "summary": (
+                "This is a mock summary generated without calling the Anthropic API. "
+                "The team discussed project updates, blockers, and next steps. "
+                "This response is for testing the UI flow only."
+            ),
+            "action_items": [
+                {
+                    "task": "Review the API contract",
+                    "owner": "John",
+                    "due_date": None,
+                },
+                {
+                    "task": "Draft follow-up email to client",
+                    "owner": "Mike",
+                    "due_date": None,
+                },
+            ],
+            "key_decisions": [
+                "Postpone mobile app launch to next month",
+            ],
+            "open_questions": [
+                "When will the Stripe webhook issue be resolved?",
+            ],
+            "participant_sentiment": [
+                {
+                    "participant": "Sarah",
+                    "sentiment": "positive",
+                    "notes": "Confident and on schedule",
+                },
+                {
+                    "participant": "Mike",
+                    "sentiment": "neutral",
+                    "notes": "Facing a technical blocker",
+                },
+            ],
+            "follow_up_email": {
+                "subject": "Meeting Update - Mock Mode",
+                "body": "Hi team,\n\nThis is a mock follow-up email generated in mock mode.\n\nBest,\nAI Assistant",
+            },
+        })
     return await asyncio.to_thread(_analyze_transcript_sync, transcript)

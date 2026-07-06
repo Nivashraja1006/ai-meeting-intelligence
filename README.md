@@ -10,11 +10,26 @@ Production-grade GenAI portfolio project that turns raw meeting transcripts into
 
 | Layer | URL |
 |-------|-----|
-| Frontend (Vercel) | `https://YOUR-APP.vercel.app` |
-| Backend (Render/Fly) | `https://YOUR-API.onrender.com` |
-| API docs | `https://YOUR-API.onrender.com/docs` |
+| Frontend (Vercel) | [Deploy →](https://vercel.com/new) then update this row |
+| Backend (Render) | [Deploy →](https://dashboard.render.com) then update this row |
+| API docs | `{BACKEND_URL}/docs` |
 
-> Replace with your deployed URLs after following [DEPLOY.md](DEPLOY.md).
+**After deploying**, run from project root:
+
+```powershell
+powershell -File scripts/update-readme-urls.ps1 `
+  -BackendUrl "https://your-api.onrender.com" `
+  -FrontendUrl "https://your-app.vercel.app"
+git add README.md && git commit -m "docs: add live demo URLs" && git push
+```
+
+Or push to GitHub first:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/push-to-github.ps1
+```
+
+Full guide: [DEPLOY.md](DEPLOY.md)
 
 ---
 

@@ -10,6 +10,7 @@ services:
     environment:
       - DATABASE_URL=sqlite:////app/data/meetings.db
       - CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+      - MOCK_MODE=true
     volumes:
       - meeting_data:/app/data
     restart: unless-stopped
