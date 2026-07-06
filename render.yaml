@@ -29,11 +29,6 @@ services:
         value: sqlite:////app/data/meetings.db
       - key: CORS_ORIGINS
         sync: false
-    disk:
-      name: meeting-data
-      mountPath: /app/data
-      sizeGB: 1
-
   - type: web
     name: ai-meeting-intelligence-frontend
     runtime: static
